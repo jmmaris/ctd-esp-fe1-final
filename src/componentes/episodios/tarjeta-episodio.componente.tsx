@@ -15,7 +15,7 @@ interface TarjetaEpisodioProps {
  * @returns un JSX element 
  */
 const TarjetaEpisodio: FC<TarjetaEpisodioProps>= ({episodio}:TarjetaEpisodioProps) => {
-    // Como los capitulos suelen repetirse entre personajes, aprovecho el cache de React Query para no volver a pedir la informacion.
+    // Como los episodios suelen repetirse entre personajes, aprovecho el cache de React Query para no volver a pedir la informacion.
     const id = episodio.split('/').pop();
     const {episodios} = useSelector((state:IRootState) => state.episodios);
     
