@@ -1,3 +1,4 @@
+import { FC } from "react";
 import {Link} from "react-router-dom";
 import './encabezado.css';
 
@@ -8,7 +9,7 @@ import './encabezado.css';
  *
  * @returns {JSX.Element}
  */
-const Encabezado = () => {
+const Encabezado: FC = () => {
 
     return <header>
             <div>
@@ -19,7 +20,7 @@ const Encabezado = () => {
                     <ul>
                         <li><Link to="/">Inicio</Link></li>
                         <li><Link to="/favoritos">Favoritos</Link></li>
-                        <li><Link to="/detalle">Detalle</Link></li>
+                        <li><Link to="/detalle/last">Detalle</Link></li>
                     </ul>
                 </nav>
             </div>
