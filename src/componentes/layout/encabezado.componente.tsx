@@ -1,5 +1,7 @@
 import { FC } from "react";
+import { useDispatch } from "react-redux";
 import {Link} from "react-router-dom";
+import { resetearPagina } from "../../actions/pagina.action";
 import './encabezado.css';
 
 /**
@@ -10,7 +12,7 @@ import './encabezado.css';
  * @returns {JSX.Element}
  */
 const Encabezado: FC = () => {
-
+    const dispatch = useDispatch();
     return <header>
             <div>
                 <div>
@@ -18,8 +20,9 @@ const Encabezado: FC = () => {
                 </div>
                 <nav>
                     <ul>
-                        <li><Link to="/">Inicio</Link></li>
-                        <li><Link to="/favoritos">Favoritos</Link></li>
+                        {/* Cuando accedo a Inicio o Favoritos desde el boton de Navegacion, quiero que se reinicien las paginas */}
+                        <li><Link to="/" onClick={() => dispatch(resetearPagina())}>Inicio</Link></li>
+                        <li><Link to="/favoritos" onClick={() => dispatch(resetearPagina())}>Favoritos</Link></li>
                         <li><Link to="/detalle/last">Detalle</Link></li>
                     </ul>
                 </nav>
