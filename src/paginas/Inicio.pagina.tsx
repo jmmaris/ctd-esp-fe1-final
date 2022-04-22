@@ -4,6 +4,7 @@ import Paginacion from "../componentes/paginacion/paginacion.componente";
 import { FC, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { buscarPersonajesThunk } from "../actions/personaje.actions";
+import { IRootState, useSelector } from "../store/store";
 
  
 /**
@@ -17,10 +18,14 @@ import { buscarPersonajesThunk } from "../actions/personaje.actions";
 const PaginaInicio: FC = () => {
     // Carga incial de personajes
     const dispatch = useDispatch();
-
-    // useEffect para la carga inicial
+    const {personajes} = useSelector((state: IRootState) => state.personajes);
+    
+    // useEffect para la carga inicial    
     useEffect(() => {
-        dispatch(buscarPersonajesThunk(''));
+        // Hago la validacion de que no haya personajes para poder volver atras sin necesidad de reiniciar la carga
+        if (personajes.length === 0) {
+            dispatch(buscarPersonajesThunk(''));
+        }
     }, []);
 
 
