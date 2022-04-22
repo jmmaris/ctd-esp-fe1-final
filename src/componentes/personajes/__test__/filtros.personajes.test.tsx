@@ -2,62 +2,55 @@ import React from "react";
 import { MemoryRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "../../../store/store";
-import { render} from "@testing-library/react";
+import { fireEvent, render, waitFor} from "@testing-library/react";
 import GrillaPersonajes from "../grilla-personajes.componente";
 import Filtros from "../filtros.componente";
+import PaginaInicio from "../../../paginas/Inicio.pagina";
 
 
 describe('Filtro Personaje Tests', () => {
 
-    it ('Filtro "Rick" devuelve 9 resultados', () => {
+    it ('Filtro "Rick" devuelve 9 resultados', async  () => {
         const {getByTestId }= render(
             <Provider store={store}>
                 <MemoryRouter >
-                    <Filtros inputRef={React.createRef()}/>
-                    <GrillaPersonajes tipo="personajes"/>
+                    <PaginaInicio />
                 </MemoryRouter>
             </Provider>
         );
-        setTimeout(() => {
-            getByTestId("filtroNombreInput").setAttribute('value', 'Rick');
-            expect(getByTestId("paginaGrilla")).toHaveLength(9);
-        },3000);
+        await waitFor(() => getByTestId("filtroNombreInput").setAttribute('value', 'Rick'),{timeout:2000});
+        await waitFor(() => expect(getByTestId('paginaGrilla').children.length).toBe(9),{timeout:2000});
         }
     )
     
-    it ('Filtro "Maestro Yoda" devuelve 0 resultados', () => {
+    it ('Filtro "Rick" devuelve 9 resultados', async  () => {
         const {getByTestId }= render(
             <Provider store={store}>
                 <MemoryRouter >
-                    <Filtros inputRef={React.createRef()}/>
-                    <GrillaPersonajes tipo="personajes"/>
+                    <PaginaInicio />
                 </MemoryRouter>
             </Provider>
         );
-        setTimeout(() => {
-            getByTestId("filtroNombreInput").setAttribute('value', 'Maestro Yoda');
-            // expet that errorDiv is displayed
-            expect(getByTestId("malala")).toBeInTheDocument();
-            // expect(getByTestId("loadingDiv")).toBeTruthy();
-        },3000);
+        getByTestId('filtroNombreInput').setAttribute('value', 'Maestro Yoda');
+        fireEvent.change(getByTestId('filtroNombreInput'));
+        await waitFor(() => expect(getByTestId("errorDiv")).toBeInTheDocument(),{timeout:2000});
         }
     )
-    it ('Filtro "Maestro Yoda" devuelve 0 resultados, Pero borrar todo devuelve los 9', () => {
+
+    it ('Filtro "Maestro Yoda" devuelve 0 resultados, Pero borrar todo devuelve los 9', async () => {
         const {getByTestId }= render(
             <Provider store={store}>
                 <MemoryRouter >
-                    <Filtros inputRef={React.createRef()}/>
-                    <GrillaPersonajes tipo="personajes"/>
+                    <PaginaInicio />
                 </MemoryRouter>
             </Provider>
         );
-        setTimeout(() => {
-            getByTestId("filtroNombreInput").setAttribute('value', 'Maestro Yoda');
-            const lenDeResultados = getByTestId("paginaGrilla").children.length;
-            getByTestId("filtroNombreInput").setAttribute('value', '');
-            expect(lenDeResultados).toBe(0);
-            expect(getByTestId("paginaGrilla")).toHaveLength(9);
-        },3000);
-        }
-    )
+        getByTestId('filtroNombreInput').setAttribute('value', 'Maestro Yoda');
+        fireEvent.change(getByTestId('filtroNombreInput'));
+        await waitFor(() => expect(getByTestId("errorDiv")).toBeInTheDocument(),{timeout:2000});
+        getByTestId('filtroNombreInput').setAttribute('value', '');
+        fireEvent.change(getByTestId('filtroNombreInput'));
+        await waitFor(()=>expect(getByTestId("paginaGrilla").children.length).toBe(9),{timeout:2000});
+    })
+
 });
