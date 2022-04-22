@@ -1,5 +1,5 @@
 import './filtros.css';
-import React, {FC, RefObject, useState} from 'react';
+import React, {FC, RefObject} from 'react';
 import { useDispatch } from 'react-redux';
 import {buscarPersonajesThunk} from '../../actions/personaje.actions';
 import { resetearPagina } from '../../actions/pagina.action';
@@ -15,12 +15,10 @@ interface filtrosProps {
  * @returns <FC>
  */
 const Filtros:FC<filtrosProps> = ({inputRef}: filtrosProps) => {
-    const [inputValue, setInputValue] = useState('');
     const dispatch = useDispatch(); 
     const onChange = (e: any) => {
         dispatch(buscarPersonajesThunk(e.target.value));
         dispatch(resetearPagina());
-        setInputValue(e.target.value);
     }
 
     return (
@@ -31,8 +29,7 @@ const Filtros:FC<filtrosProps> = ({inputRef}: filtrosProps) => {
                 ref = {inputRef} 
                 type="text" 
                 placeholder="Rick, Morty, Beth, Alien, ...etc" 
-                name="nombre" 
-                value = {inputValue} 
+                name="nombre"  
                 onChange={(e) => onChange(e)}
             />
         </div>
