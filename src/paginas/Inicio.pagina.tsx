@@ -43,7 +43,7 @@ const PaginaInicio: FC = () => {
     return <div className="container">
         <div className="actions">
             <h3>Catálogo de Personajes</h3>
-            <button className="danger" onClick={handleClick}>Limpiar Filtros</button>
+            <button className="danger" onClick={handleClick} data-testid='botonEliminarFiltro'>Limpiar Filtros</button>
         </div>
         <Filtros inputRef = {inputRef}/>
         <Paginacion tipo= "personajes"/>
