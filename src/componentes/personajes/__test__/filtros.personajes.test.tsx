@@ -2,9 +2,7 @@ import React from "react";
 import { MemoryRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "../../../store/store";
-import { fireEvent, render, waitFor, screen} from "@testing-library/react";
-import GrillaPersonajes from "../grilla-personajes.componente";
-import Filtros from "../filtros.componente";
+import { fireEvent, render, waitFor} from "@testing-library/react";
 import PaginaInicio from "../../../paginas/Inicio.pagina";
 
 
