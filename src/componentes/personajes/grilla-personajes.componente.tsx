@@ -24,14 +24,14 @@ const GrillaPersonajes: FC<TipoPaginaProps>= ({tipo}: TipoPaginaProps) => {
 
     const tipoPaginas = tipo === 'personajes' ? personajesPaginas : favoritosPaginas;
 
-    if (status === 'LOADING') return <div>Cargando...</div>
-    if (status === 'ERROR') return <div>Error en la carga de personajes.</div>
-    if (!tipoPaginas || tipoPaginas.length === 0) return <div></div>
+    if (status === 'LOADING') return <div data-testid="loadingDiv">Cargando...</div>
+    if (status === 'ERROR') return <div data-testid="errorDiv">Error en la carga de personajes.</div>
+    if (!tipoPaginas || tipoPaginas.length === 0) return <div data-testid="initialDiv"></div>
     
     // Accedo a los personajes correspondientes (favoritos o personajes) de la pagina actual.
     // Para esto, elijo la pagina del tipo que corresponda que tenga el id igual al numero de pagina actual.
     const personajes_en_pagina = tipoPaginas.find((tipoPaginas) => tipoPaginas.id === (tipo === 'personajes' ? personajes : favoritos));
-    return <div className="grilla-personajes">
+    return <div className="grilla-personajes" data-testid="paginaGrilla">
        {personajes_en_pagina && personajes_en_pagina.personajesEnPagina.map((personaje) => <TarjetaPersonaje personaje={personaje}  key={'Personaje_' + personaje.id}/>)}
     </div>
 }

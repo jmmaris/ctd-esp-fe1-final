@@ -49,7 +49,7 @@ const TarjetaPersonaje: FC<TarjetaPersonajeProps> = ({personaje}:TarjetaPersonaj
     }
     
     return <div className="tarjeta-personaje" >
-        <img src={personaje.image} alt={personaje.name} onClick={handleClick}/>
+        <img src={personaje.image} alt={personaje.name} onClick={handleClick} data-testid = 'PersonajeImg'/>
         <div className="tarjeta-personaje-body">
             <span>{personaje.name}</span>
             <BotonFavorito esFavorito={esFavorito} onClick={handleFavorito} />

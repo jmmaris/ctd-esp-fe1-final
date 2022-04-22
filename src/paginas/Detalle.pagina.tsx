@@ -36,7 +36,7 @@ const PaginaDetalle: FC = () => {
     if (!personajeDetalle) return <p className="error-texto">No hay personaje para mostrar</p>
 
     // Retorno del componente 
-    return <div className="container">
+    return <div className="container" data-testid="paginaDetalle">
                 <h3>{personajeDetalle.name}</h3>
                 <div className={"detalle"}>
                     <div className={"detalle-header"}>

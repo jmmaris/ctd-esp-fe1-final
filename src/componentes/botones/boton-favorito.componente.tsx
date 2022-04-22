@@ -18,8 +18,8 @@ interface BotonFavoritoProps {
 const BotonFavorito: FC<BotonFavoritoProps> = ({esFavorito, onClick}: BotonFavoritoProps) => {
     const src = esFavorito ? "/imagenes/star-filled.png" : "/imagenes/star.png"
 
-    return <div className="boton-favorito" onClick={onClick}>
-        <img src={src} alt={"favorito"} />
+    return <div className="boton-favorito" onClick={onClick} data-testid='FavButton'>
+        <img src={src} alt={"favorito"} data-testid='FavStarImg'/>
     </div>
 }
 
